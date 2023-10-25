@@ -3,11 +3,8 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 import Badge from "@mui/material/Badge";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
-
-
 
 // writting styled css;
 const Container = styled.div`
@@ -20,7 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ padding: "2px 0px"})}
+  ${mobile({ padding: "2px 0px" })}
 `;
 
 const Left = styled.div`
@@ -73,8 +70,8 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const quantity= useSelector(state=>state.cart.quantity)
- 
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <Container>
       <Wrapper>
@@ -89,15 +86,20 @@ const Navbar = () => {
           <Logo>E-commerce.</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-         <Link to='/cart'>
-         <MenuItem>
-            <Badge badgeContent={quantity} color="primary">
-              <PiShoppingCartSimple size={30} />
-            </Badge>
-          </MenuItem>
-         </Link>
+          <Link style={{ textDecoration: "none" }} to="/register">
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
+
+          <Link style={{ textDecoration: "none" }} to="/login">
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
+          <Link to="/cart">
+            <MenuItem>
+              <Badge badgeContent={quantity} color="primary">
+                <PiShoppingCartSimple size={30} />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
@@ -105,5 +107,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
