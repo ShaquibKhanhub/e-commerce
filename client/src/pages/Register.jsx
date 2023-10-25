@@ -3,8 +3,6 @@ import axios from "axios";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
-
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -133,12 +131,12 @@ const Register = () => {
             onChange={handlePassword}
             required
           />
-         
+
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button onClick={handleApi} ></Button>
+          <Button onClick={handleApi}>Register</Button>
         </Form>
       </Wrapper>
     </Container>

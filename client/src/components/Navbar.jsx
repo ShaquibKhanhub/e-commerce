@@ -83,7 +83,9 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>E-commerce.</Logo>
+          <Link style={{textDecoration:"none"}} to="/">
+            <Logo>E-commerce.</Logo>
+          </Link>
         </Center>
         <Right>
           <Link style={{ textDecoration: "none" }} to="/register">
