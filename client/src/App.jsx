@@ -11,6 +11,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Success from "./pages/Success";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -30,6 +32,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route exact path="/product/:id" element={<Product />} />
         <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/success" element={<Success/>}/>
         <Route
           exact
           path="/login"
@@ -41,6 +44,7 @@ function App() {
         />
         <Route exact path="/register" element={<Register />} />
       </Routes>
+      <Toaster/>
     </Router>
   );
 }

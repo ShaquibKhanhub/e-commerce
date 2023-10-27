@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { publicRequest } from "../resMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const Container = styled.div``;
 
@@ -153,6 +154,8 @@ const Product = () => {
   const handleClick = () => {
     //update cart
     dispatch(addProduct({ ...product, quantity, color, size }));
+
+toast.success('Added To Cart')
   };
   return (
     <Container>

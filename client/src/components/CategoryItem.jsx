@@ -13,7 +13,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  ${mobile({height:'20vh'})}
+  ${mobile({ height: "20vh" })}
 `;
 
 const Info = styled.div`
@@ -41,16 +41,15 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
 `;
-const CategoryItem = ({ img, title,cat }) =>
- {
+const CategoryItem = ({ img, title, cat, handler }) => {
   return (
     <Container>
       <Link to={`/products/${cat}`}>
-      <Image src={img} />
-      <Info>
-        <Title>{title}</Title>
-        <Button>SHOP NOW</Button>
-      </Info>
+        <Image src={img} />
+        <Info>
+          <Title>{title}</Title>
+          <Button>SHOP NOW</Button>
+        </Info>
       </Link>
     </Container>
   );
