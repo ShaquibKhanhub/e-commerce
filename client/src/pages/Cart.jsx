@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import me from "../assets/Vicky__SQL.png";
 //import icons
+import { AiFillDelete } from "react-icons/ai";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Navbar from "../components/Navbar";
@@ -9,11 +8,10 @@ import Footer from "../components/Footer";
 //import styled-components;
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
-import StripeCheckout from "react-stripe-checkout";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../redux/cartRedux";
+import { loadStripe } from "@stripe/stripe-js";
 import { userRequest } from "../resMethods";
-const KEY = import.meta.env.VITE_REACT_STRIPE_KEY;
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -163,33 +161,29 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
-  const navigate = useNavigate();
+  const productss = useSelector((state) => state.cart.products);
 
-  const onToken = (token) => {
-    setStripeToken(token);
+  const handlePayment = async () => {
+    try {
+      const stripe = await loadStripe(
+        "pk_test_51O4fcPSDGn3onhRMYi8jvhlw4uv3VbHjTXEiJmlovqMYL2GAgjk5Db1IPQ2R9UnsB8FkaK3Q8rGjzbyP22CfpWoF00BEuZObeC"
+      );
+
+      const res = await userRequest.post("/checkout/payment", {
+        productss,
+      });
+      console.log(res);
+
+      await stripe.redirectToCheckout({
+        sessionId: res.data.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-     
-        navigate("/success", {
-          stripeData: res.data,
-          products: cart,
-        });
-        console.log(res);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate]);
   return (
     <Container>
       <Navbar />
@@ -206,7 +200,7 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
+            {productss?.map((product) => (
               <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
@@ -221,6 +215,11 @@ const Cart = () => {
                     <ProductSize>
                       <b>Size:</b> {product.size}
                     </ProductSize>
+                    <AiFillDelete
+                      size={25}
+                      style={{ color: "red", cursor: "pointer" }}
+                      onClick={() => dispatch(removeItem(product._id))}
+                    />
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
@@ -261,18 +260,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="E-commerce."
-              image={me}
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+            <Button onClick={handlePayment}>PROCEED TO CHECKOUT</Button>
           </Summary>
         </Bottom>
       </Wrapper>

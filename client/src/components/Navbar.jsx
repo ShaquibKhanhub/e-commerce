@@ -70,7 +70,7 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.quantity);
+  const products = useSelector((state) => state.cart.products);
 
   return (
     <Container>
@@ -97,7 +97,7 @@ const Navbar = () => {
           </Link>
           <Link to="/cart">
             <MenuItem>
-              <Badge badgeContent={quantity} color="primary">
+              <Badge badgeContent={products.length} color="primary">
                 <PiShoppingCartSimple size={30} />
               </Badge>
             </MenuItem>

@@ -34,6 +34,7 @@
     "react-stripe-checkout": "^2.6.3",
     "redux-persist": "^6.0.0",
     "sass": "^1.69.4",
+    "stripe": "^14.2.0",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {

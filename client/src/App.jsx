@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import Success from "./pages/Success";
 import { Toaster } from "react-hot-toast";
+import Cancel from "./pages/Cancel";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -43,6 +44,7 @@ function App() {
           }
         />
         <Route exact path="/register" element={<Register />} />
+        <Route path="cancel" element={<Cancel/>}/>
       </Routes>
       <Toaster/>
     </Router>

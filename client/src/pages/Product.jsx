@@ -155,7 +155,7 @@ const Product = () => {
     //update cart
     dispatch(addProduct({ ...product, quantity, color, size }));
 
-toast.success('Added To Cart')
+    toast.success("Added To Cart");
   };
   return (
     <Container>

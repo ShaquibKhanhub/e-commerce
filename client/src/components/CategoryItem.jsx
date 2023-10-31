@@ -41,7 +41,7 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
 `;
-const CategoryItem = ({ img, title, cat, handler }) => {
+const CategoryItem = ({ img, title, cat}) => {
   return (
     <Container>
       <Link to={`/products/${cat}`}>

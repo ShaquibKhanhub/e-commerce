@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 //import styled-components;
 
 const Container = styled.div``;
@@ -38,6 +39,7 @@ const Select = styled.select`
   ${mobile({ margin: "10px 0px" })}
 `;
 const Option = styled.option``;
+
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
@@ -87,7 +89,7 @@ const ProductList = () => {
           </Select>
         </Filter>
       </FilterContainer>
-      <Products cat={cat} filters={filters} sort={sort}/>
+      <Products cat={cat} filters={filters} sort={sort} />
       <Newsletter />
       <Footer />
     </Container>
