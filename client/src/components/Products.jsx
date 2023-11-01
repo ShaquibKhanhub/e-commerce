@@ -25,7 +25,6 @@ const Products = ({ cat, filters, sort }) => {
             : "http://localhost:5000/api/products"
         );
         setProducts(res.data);
-        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -67,9 +66,9 @@ const Products = ({ cat, filters, sort }) => {
         ? filteredProducts.map((item) => (
             <SingleProductPage key={item._id} {...item} />
           ))
-        : products.slice(0,8).map((item) => (
-            <SingleProductPage key={item._id} {...item} />
-          ))}
+        : products
+            .slice(0, 8)
+            .map((item) => <SingleProductPage key={item._id} {...item} />)}
     </Container>
   );
 };
