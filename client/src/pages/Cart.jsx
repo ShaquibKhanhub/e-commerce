@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../redux/cartRedux";
 import { loadStripe } from "@stripe/stripe-js";
 import { userRequest } from "../resMethods";
+import toast from "react-hot-toast";
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -218,7 +220,7 @@ const Cart = () => {
                     <AiFillDelete
                       size={25}
                       style={{ color: "red", cursor: "pointer" }}
-                      onClick={() => dispatch(removeItem(product._id))}
+                      onClick={() => dispatch(removeItem(product._id)) }
                     />
                   </Details>
                 </ProductDetail>

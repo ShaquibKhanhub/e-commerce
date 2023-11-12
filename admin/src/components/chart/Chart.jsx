@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./chart.css";
 import {
   LineChart,
@@ -9,6 +10,11 @@ import {
 } from "recharts";
 
 const Chart = ({ title, data, dataKey, grid }) => {
+  const [userStats, setUserStats] = useState();
+ 
+
+
+
   return (
     <div className="chart">
       <h3 className="cartTitle">{title}</h3>
